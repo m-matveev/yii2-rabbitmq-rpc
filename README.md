@@ -8,7 +8,7 @@ INSTALLATION
 ------------
 
 ```bash
-composer require mamatveev/yii2-rabbitmq-rpc
+composer require mamatveev/yii2-rabbitmq-rpc:@dev
 ```
 
 Add a component configuration in the application config:
