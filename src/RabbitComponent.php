@@ -2,7 +2,6 @@
 namespace mamatveev\yii2rabbitmq;
 
 use PhpAmqpLib\Connection\AbstractConnection;
-use Thumper\RpcServer;
 use yii\base\InvalidConfigException;
 
 class RabbitComponent extends \yii\base\Component
@@ -30,7 +29,7 @@ class RabbitComponent extends \yii\base\Component
     /**
      * @var string connection class
      */
-    public $amqp_connection_class = \PhpAmqpLib\Connection\AMQPStreamConnection::class;
+    public $amqp_connection_class = \PhpAmqpLib\Connection\AMQPLazyConnection::class;
 
     /**
      * @var string

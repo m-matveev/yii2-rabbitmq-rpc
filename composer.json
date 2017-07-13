@@ -1,7 +1,8 @@
 {
-  "name": "mamatveev/yii2rabbitmq",
+  "name": "mamatveev/yii2-rabbitmq-rpc",
   "type": "yii2-extension",
   "description": "Yii2 rpc client and server classes",
+  "minimum-stability": "dev",
   "license": "MIT",
   "authors": [
     {

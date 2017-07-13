@@ -48,8 +48,8 @@ class RpcClient extends \Thumper\RpcClient
      */
     public function initClient($exchangeName)
     {
-        list($this->queueName, , ) = $this->channel->queue_declare('', false, false, true, true);
-
+        $this->queueName = $this->getConsumerTag().'-queue';
+        $this->channel->queue_declare($this->queueName, false, false, true, true);
         $this->exchangeName = $exchangeName;
         $this->requestsCount = 0;
         $this->repliesCount = 0;
@@ -58,7 +58,7 @@ class RpcClient extends \Thumper\RpcClient
 
     /**
      * Send a message to exchange
-     * @param \Serializable $msgBody
+     * @param mixed $msgBody
      * @param null|mixed $correlationId
      * @param string $routingKey
      */
@@ -72,7 +72,7 @@ class RpcClient extends \Thumper\RpcClient
         $msg = new AMQPMessage(serialize($msgBody),
             [
                 'content_type' => 'text/plain',
-                'reply_to' => $this->exchangeName,
+                'reply_to' => $this->queueName,
                 'correlation_id' => $correlationId
             ]
         );
@@ -144,6 +144,7 @@ class RpcClient extends \Thumper\RpcClient
         if ($this->isConsumed)
         {
             $this->channel->basic_cancel($this->queueName);
+            $this->channel->queue_declare($this->queueName, false, false, true, true);
         }
 
         $this->callback = $replyHandler;
