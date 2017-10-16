@@ -4,8 +4,9 @@ namespace mamatveev\yii2rabbitmq;
 
 
 use PhpAmqpLib\Message\AMQPMessage;
+use Thumper\BaseAmqp;
 
-class RpcClient extends \Thumper\RpcClient
+class RpcClient extends BaseAmqp
 {
     /**
      * @var string
@@ -43,10 +44,15 @@ class RpcClient extends \Thumper\RpcClient
     protected $callback = null;
 
     /**
+     * @var string
+     */
+    protected $queueName;
+
+    /**
      * init a exchange client
      * @param $exchangeName
      */
-    public function initClient($exchangeName)
+    public function initClient($exchangeName = null)
     {
         $this->queueName = $this->getConsumerTag().'-queue';
         $this->channel->queue_declare($this->queueName, false, false, true, true);
