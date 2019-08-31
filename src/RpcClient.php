@@ -20,6 +20,12 @@ class RpcClient extends BaseAmqp
     protected $requestsCount = 0;
 
     /**
+     * request timeout
+     * @var int
+     */
+    protected $requestTimeout = 0;
+    
+    /**
      * count of received reply's
      * @var int
      */
