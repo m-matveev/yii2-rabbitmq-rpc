@@ -24,7 +24,7 @@ class RpcClient extends BaseAmqp
      * @var int
      */
     protected $requestTimeout = 0;
-    
+
     /**
      * count of received reply's
      * @var int
@@ -207,4 +207,10 @@ class RpcClient extends BaseAmqp
     {
         return $this->repliesCount;
     }
+
+    public function setRequestTimeout(int $timeout)
+    {
+        $this->requestTimeout = $timeout;
+    }
+
 }
